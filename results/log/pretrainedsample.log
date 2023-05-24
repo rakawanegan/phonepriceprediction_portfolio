@@ -1,4 +1,4 @@
-load config: {'data_dir': 'data/additive_data/minmax', 'load_pretraind': 'True', 'model_name': 'knnsample', 'pps': 'minmax'}
+load config: {'load_pretraind': 'True', 'model_name': 'knnsample', 'pps': 'std', 'data_dir': 'data/official_data/'}
 preprocessing:
 loading pretraind model
 predicting
