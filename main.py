@@ -31,8 +31,9 @@ def main():
     setting_dict = read_config(os.path.join("config",config.path),config.name)
 
     print("load config:",setting_dict)
-    train = pd.read_csv(setting_dict.pop("data_dir"),index_col="id")
-    TEST = pd.read_csv("data/official_data/test.csv",index_col="id")
+    dir = setting_dict.pop("data_dir")
+    train = pd.read_csv(f"{dir}train.csv",index_col="id")
+    TEST = pd.read_csv(f"{dir}test.csv",index_col="id")
 
     x_train = train.drop("price_range",axis=1)
     y_train = train["price_range"]
@@ -40,16 +41,19 @@ def main():
     ppss = {
         "std": StandardScaler,
        "minmax": MinMaxScaler,
-        "None": False
+        "None": False,
     }
 
-    pps = ppss[setting_dict.pop("pps")]
+    pps_key = setting_dict.pop("pps")
+    pps = ppss[pps_key]
 
     if pps:
         print("preprocessing:")
         pps = pps()
         x_train = pd.DataFrame(pps.fit_transform(x_train),index=x_train.index,columns=x_train.columns)
         TEST = pd.DataFrame(pps.transform(TEST),index=TEST.index,columns=TEST.columns)
+        pd.concat([x_train,y_train],axis=1).to_csv(f"data/additive_data/{pps_key}train.csv")
+        TEST.to_csv(f"data/additive_data/{pps_key}test.csv")
 
 
     if setting_dict.pop("load_pretraind")=="True":
