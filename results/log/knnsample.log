@@ -1,0 +1,5 @@
+load config: {'model_key': 'knn', 'k': 3, 'data_dir': 'data/official_data/train.csv', 'pps': 'minmax', 'load_pretraind': 'False'}
+preprocessing: <class 'sklearn.preprocessing._data.MinMaxScaler'>
+training model
+predicting
+done
