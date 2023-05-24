@@ -71,7 +71,29 @@ authorized intermediate participant.
 ```
 python3 run.py --path [.ini file path] --name [config name]
 ```
+You have the flexibility to configure each model using the following format: [key] = [type] [value].  
 
+### Common configurations:  
+datadir(str): Directory path for the data  
+model_key(str): Name of the model -->[ nn, knn, lgbm ]  
+pps(str): Preprocessing method -->[ std, minmax, None ]  
+load_pretrained(str): Set to either True or False -->[ True, False ]  
+model_name(str): Name of the pre-trained model to load  
+
+### Neural Network configuration:
+input_shape(int): Shape of the input data  
+L(int): Number of neurons in the first layer  
+epoch(int): Maximum number of epochs  
+batch(int): Batch size  
+random_state(int): Random seed  
+
+### KNN configuration:
+k(int): Number of nearest points to consider  
+
+### LGBM configuration:
+None
+
+Feel free to adjust these configurations based on your specific needs and model requirements.
 
 ## License
 
