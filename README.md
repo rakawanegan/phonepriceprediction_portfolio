@@ -1,67 +1,78 @@
 # Phone Price Prediction Bigenner Cup
 
-A brief description of your project goes here.
+solution to promotion Intermediate  
+https://signate.jp/competitions/750
+
 
 ## Table of Contents
 
-- [Description](#description)
-- [Installation](#installation)
+- [Competition Description](#competition-description)
+- [Dataset](#dataset)
+- [Solution Approach](#solution-approach)
+- [Results](#results)
+- [Reproduction](#reproduction)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
 - [License](#license)
-- [Tree](#tree)
 
-## Description
 
-Provide a more detailed description of your project, including its purpose and any key features.
+## Competition Description
 
-## Installation
+This competition is open to beginners and registered participants.  
+If your F1 macro score exceeds 0.462885, you will be recognized as an authorized intermediate participant.
 
-Describe the steps required to install and set up your project. Include any dependencies or prerequisites.
+
+## Dataset
+
+| 0  | id            | int | Index (used as an identifier)                        |  
+|----|---------------|-----|------------------------------------------------------|  
+| 1  | battery_power | int | Total energy a battery can store in one charge (mAh) |  
+| 2  | blue          | int | Bluetooth availability (1 if available)              |  
+| 3  | clock_speed   | float | Clock speed                                        |  
+| 4  | dual_sim      | int | Dual SIM support availability (1 if available)       |  
+| 5  | fc            | int | Front camera megapixels                              |  
+| 6  | four_g        | int | 4G support availability (1 if available)             |  
+| 7  | int_memory    | int | Internal memory (GB)                                 |  
+| 8  | m_dep         | float | Mobile depth (cm)                                  |  
+| 9  | mobile_wt     | int | Weight                                               |  
+| 10 | n_cores       | int | Number of cores                                      |  
+| 11 | pc            | int | Primary camera megapixels                            |  
+| 12 | px_height     | int | Pixel resolution height                              |  
+| 13 | px_width      | int | Pixel resolution width                               |  
+| 14 | ram           | int | Random Access Memory (MB)                            |  
+| 15 | sc_h          | int | Screen height of the mobile (cm)                     |  
+| 16 | sc_w          | int | Screen width of the mobile (cm)                      |  
+| 17 | talk_time     | int | Continuous talk time                                 |  
+| 18 | three_g       | int | 3G support availability (1 if available)             |  
+| 19 | touch_screen  | int | Touch screen availability                            |  
+| 20 | wifi          | int | Wi-Fi availability (1 if available)                  |  
+| 21 | price_range   | int | Price range:target 0 (low cost), 3 (very high cost)  |
+
+
+## Solution Approach
+
+### preprocess
+- minmaxscaler(sk-learn)
+- standardscaler(sk-learn)
+
+### model
+- LightGBM
+- NeuralNetwork(Dence)
+- KNearestNeighbor
+
+Describe how others can use your code or model for their own predictions. Provide instructions on setting up the environment, installing dependencies, and running the code.
+## Results
+
+authorized intermediate participant.
+
 
 ## Usage
 
-Explain how to use your project or provide examples of its usage. Include any relevant instructions or command-line examples.
+```
+python3 run.py --path [.ini file path] --name [config name]
+```
 
-## Contributing
-
-Specify how others can contribute to your project. It could be guidelines for submitting bug reports, feature requests, or code contributions.
 
 ## License
 
-Include information about the license governing your project. Specify the type of license and provide a link to the license file if applicable.
-
-
-## Tree
-
-├── analysis  
-│   └── first_analysis.ipynb  
-├── baseline.py  
-├── config  
-│   └── sample.ini  
-├── data  
-│   ├── additive_data  
-│   └── official_data  
-│       ├── sample_submission.csv  
-│       ├── test.csv  
-│       └── train.csv  
-├── evaluator  
-├── predictor  
-│   ├── kNearestNeighbormodel.py  
-│   ├── LightGBMoptunamodel.py  
-│   └── NeuralNetworkmodel.py  
-├── preprocessor  
-├── README.md  
-├── requirements.txt  
-├── results  
-│   ├── log  
-│   ├── model  
-│   │   ├── kNearestNeighbor.model  
-│   │   ├── knnsample.model  
-│   │   ├── LightGBM.model  
-│   │   └── NeuralNetwork.model  
-│   └── submit  
-│       ├── knnsamplepredict.csv  
-│       ├── lgbmsample1predict.csv  
-│       └── nnsample1predict.csv  
-└── run.py  
+free.
