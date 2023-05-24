@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import configparser
 import argparse
+import joblib
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 from predictor.LightGBMoptunamodel import LightGBM
@@ -37,7 +38,7 @@ def main():
 
     ppss = {
         "std": StandardScaler,
-        "minmax": MinMaxScaler,
+       "minmax": MinMaxScaler,
         "None": False
     }
 
@@ -48,20 +49,21 @@ def main():
         x_train = pd.DataFrame(pps.fit_transform(x_train),index=x_train.index,columns=x_train.columns)
         TEST = pd.DataFrame(pps.transform(TEST),index=TEST.index,columns=TEST.columns)
 
-    models = {
-        "lgbm": LightGBM,
-        "nn":   NeuralNetwork,
-        "knn":  kNearestNeighbor
-    }
+    if setting_dict.pop("load_pretraind")=="True":
+        model = joblib.load(f"results/model/{setting_dict['model_name']}.model")
+    else:
+        models = {
+            "lgbm": LightGBM,
+            "nn":   NeuralNetwork,
+            "knn":  kNearestNeighbor
+        }
+        model = models[setting_dict.pop("model_key")]
+        model = model(*setting_dict.values())
+        model.fit(x_train,y_train)
+        model.dump(config.name)
 
-
-    model = models[setting_dict.pop("model_key")]
-    model = model(*setting_dict.values())
-
-    model.fit(x_train, y_train)
-
-    model.dump(config.name)
     y_predict = model.predict(TEST)
+    print(y_predict)
     y_predict.to_csv(f"results/submit/{config.name}predict.csv",header=False)
 
 if __name__ == '__main__':
