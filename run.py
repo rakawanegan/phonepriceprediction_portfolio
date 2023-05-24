@@ -48,7 +48,7 @@ def main():
         pps = pps()
         x_train = pd.DataFrame(pps.fit_transform(x_train),index=x_train.index,columns=x_train.columns)
         TEST = pd.DataFrame(pps.transform(TEST),index=TEST.index,columns=TEST.columns)
-        x_train.to_csv(f"data/additive_data/{config.name}_x_train.csv")
+        x_train.to_csv(f"data/additive_data/{config.name}_xtrain.csv")
         TEST.to_csv(f"data/additive_data/{config.name}_TEST.csv")
 
 
