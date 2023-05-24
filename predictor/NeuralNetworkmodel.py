@@ -86,4 +86,4 @@ class NeuralNetwork():
         return y_predict
     
     def dump(self,filename="NeuralNetwork"):
-        joblib.dump(self.model, f"results/model/{filename}.model")
+        joblib.dump(self, f"results/model/{filename}.model")

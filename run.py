@@ -42,12 +42,15 @@ def main():
         "None": False
     }
 
-
     pps = ppss[setting_dict.pop("pps")]
+
     if pps:
         pps = pps()
         x_train = pd.DataFrame(pps.fit_transform(x_train),index=x_train.index,columns=x_train.columns)
         TEST = pd.DataFrame(pps.transform(TEST),index=TEST.index,columns=TEST.columns)
+        x_train.to_csv(f"data/additive_data/{config.name}_x_train.csv")
+        TEST.to_csv(f"data/additive_data/{config.name}_TEST.csv")
+
 
     if setting_dict.pop("load_pretraind")=="True":
         model = joblib.load(f"results/model/{setting_dict['model_name']}.model")
@@ -63,7 +66,6 @@ def main():
         model.dump(config.name)
 
     y_predict = model.predict(TEST)
-    print(y_predict)
     y_predict.to_csv(f"results/submit/{config.name}predict.csv",header=False)
 
 if __name__ == '__main__':

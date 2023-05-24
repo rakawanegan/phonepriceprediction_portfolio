@@ -49,4 +49,4 @@ class LightGBM():
         return pd.DataFrame({'prediction': self.model.predict(x_test)}, index=x_test.index)
 
     def dump(self, filename="LightGBM"):
-        joblib.dump(self.model, f"results/model/{filename}.model")
+        joblib.dump(self, f"results/model/{filename}.model")

@@ -24,4 +24,4 @@ class kNearestNeighbor():
         return y_predict
     
     def dump(self,filename="kNearestNeighbor"):
-        joblib.dump(self.knn, f"results/model/{filename}.model")
+        joblib.dump(self, f"results/model/{filename}.model")
