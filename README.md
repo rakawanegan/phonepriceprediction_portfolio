@@ -69,6 +69,10 @@ authorized intermediate participant.
 ## Usage
 
 ```
+pip install -r requirements.txt
+```
+
+```
 python3 run.py --path [.ini file path] --name [config name]
 ```
 You have the flexibility to configure each model using the following format: [key] = [type] [value].  
